@@ -2,9 +2,11 @@ import Message from './Message';
 import useGetMessages from '../../hook/useGetMessages';
 import MesssageSkeleton from '../skeleton/MesssageSkeleton';
 import { useEffect, useRef } from 'react';
+import useListenToMessages from '../../hook/useListenToMessages';
 
 const Messages = () => {
     const { loading, messages } = useGetMessages();
+    useListenToMessages()
     const lastMessageRef = useRef()
 
     const loadingSkeletons = loading && [...Array(3)].map((_, idx) => <MesssageSkeleton key={idx} />);

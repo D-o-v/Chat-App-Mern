@@ -13,6 +13,7 @@ const Message = ({ message }) => {
   const chatProfilePicture = isMessageFromMe ?authUser?.profilePic:selectedConversation?.profilePic
   const bubbleChatBackground = isMessageFromMe ?'bg-blue-500':''
   const formattedTime =extractTime(message?.createdAt)
+  const shakeClass = message.shouldShake? 'shake':''
 
   // function convertTo12HourFormatWithDate(isoString) {
   //   const date = new Date(isoString);
@@ -47,7 +48,7 @@ const Message = ({ message }) => {
           />
         </div>
       </div>
-      <div className={`chat-bubble ${ bubbleChatBackground} text-white pb-2`}>{message?.message}</div>
+      <div className={`chat-bubble ${ bubbleChatBackground} ${shakeClass} text-white pb-2`}>{message?.message}</div>
       {/* <div className="chat-footer opacity-50 items-center gap-1 flex text-xs">{convertTo12HourFormatWithDate(message?.createdAt)}</div> */}
       <div className="chat-footer opacity-50 items-center gap-1 flex text-xs">{formattedTime}</div>
     </div>
