@@ -4,23 +4,30 @@ import MessageInput from './MessageInput'
 import { TiMessages } from 'react-icons/ti'
 import useConversation from '../../zustand/useConversation'
 import { useAuthContext } from '../../context/AuthContext'
+import { GoArrowLeft } from "react-icons/go";
 
 
 const MessageContainer = () => {
-
   const { selectedConversation,setSelectedConversation} = useConversation()
 
-  useEffect(()=>{
-    //cleanup function (unmounts)
-    return () => setSelectedConversation(null)
-  },[setSelectedConversation])
+  // useEffect(()=>{
+  //   //cleanup function (unmounts)
+  //   return () => {setSelectedConversation(null)
+  //   }
+  // },[setSelectedConversation])
 
   return (
-    <div className='md:min-w-[450px] flex flex-col'>
+    <div className='max-h-[98vh] md:min-w-[450px] flex flex-col'>
       {!selectedConversation ?
         <NoChatSelected />
         : <>
-          <div className='bg-slate-500 px-4 py-2 mb-2'>
+          <div className='flex items-center bg-slate-500 px-4 py-2 mb-2'>
+            <button className='btn  btn-xs mr-3'
+            onClick={()=>setSelectedConversation(null)}>
+            <GoArrowLeft 
+          className=' w-full'
+          />
+            </button>
             <span className='label-text'>To:</span> <span className='text-gray-900 font-bold'>{selectedConversation.fullName}</span>
           </div>
           <Messages />

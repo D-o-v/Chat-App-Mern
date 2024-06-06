@@ -18,8 +18,8 @@ const isOnline = onlineUsers.includes(conversation._id)
       <div className={`avatar ${isOnline?'online':""}`}>
         <div className='w-12 rounded-full'>
           <img
-            // src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
-            src={conversation?.profilePic}
+             src="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
+            // src={conversation?.profilePic}
             alt="user avatar" />
         </div>
       </div>
@@ -27,7 +27,7 @@ const isOnline = onlineUsers.includes(conversation._id)
       <div className='flex flex-col flex-1'>
         <div className='flex gap-3 justify-between'>
           <p className='font-bold text-gray-200'>{conversation?.fullName}</p>
-          <span className='text-xl'>{emoji}</span>
+          {/* <span className='text-xl'>{emoji}</span> */}
         </div>
       </div>
     </div>
