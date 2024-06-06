@@ -8,7 +8,8 @@ const useGetCoversation = () => {
         const getConversations = async () => {
             setLoading(true)
             try {
-                const res = await fetch('/api/users', {
+                const res = await fetch('/api/friends', {
+                // const res = await fetch('/api/users', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
