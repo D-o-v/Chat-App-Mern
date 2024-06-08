@@ -1,3 +1,4 @@
+import Conversation from "../modules/conversation.modules.js";
 import Friends from "../modules/friend.modules.js";
 import User from "../modules/user.modules.js";
 
@@ -78,7 +79,38 @@ export const setUserFriend = async (req, res) => {
 };
 
 
+export const getRecentConversations = async (req, res) => {
+    try {
+        const loggedInUserId = req.user._id;
 
+        // Find conversations involving the logged-in user, sorted by updatedAt in descending order
+        const conversations = await Conversation.find({
+            participants: loggedInUserId
+        })
+        .sort({ updatedAt: -1 }) // Sort by latest updated
+        .populate({
+            path: 'participants',
+            select: 'fullName username gender profilePic' // Select only necessary fields
+        })
+        .lean(); // Use lean for performance
+
+        // Extract participants from conversations
+        const participants = [];
+        for (const conversation of conversations) {
+            for (const participant of conversation.participants) {
+                if (participant._id.toString() !== loggedInUserId.toString()) {
+                    participants.push(participant);
+                    break; // Since only one participant per conversation is needed, break the loop
+                }
+            }
+        }
+
+        res.status(200).json(participants);
+    } catch (error) {
+        console.log('Error in getting recent conversations', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 
 

@@ -43,11 +43,17 @@ export const sendMessage = async (req, res) => {
 
         await Promise.all([conversation.save(), newMessage.save()])
 
-        const receiverSocketId = getRecieverSocketId(recieverId)
-        if(receiverSocketId){
-            //io.to<socket.id>.emit() is used to send messages to a specific client
-            io.to(receiverSocketId).emit('newMessage', newMessage)
+        const receiverSocketId = getRecieverSocketId(recieverId);
+        const senderSocketId = getRecieverSocketId(senderId);
+
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit('newMessage', newMessage, senderId);
         }
+
+        if (senderSocketId) {
+            io.to(senderSocketId).emit('newMessage', newMessage, recieverId);
+        }
+
 
         res.status(201).json(newMessage)
 
@@ -56,6 +62,7 @@ export const sendMessage = async (req, res) => {
         return res.status(500).json({ message: "Internal server error occured" })
     }
 }
+
 
 export const getMessage = async (req, res) => {
     try {
