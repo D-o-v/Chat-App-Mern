@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import useConversation from '../zustand/useConversation';
+import sendMessageSound from '../assets/sound/sendmessagesound.wav'
 
 const useSendMessage = () => {
     const [loading, setLoading] = useState(false);
-    const {selectedConversation,messages,setMessages}=useConversation()
+    const { selectedConversation, messages, setMessages } = useConversation()
 
     const sendMessage = async (message) => {
         setLoading(true)
@@ -14,13 +15,17 @@ const useSendMessage = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({message})
+                body: JSON.stringify({ message })
             })
             const data = await res.json()
             if (data.error) {
                 throw new Error(data.error)
             }
-            setMessages([...messages,data])
+            data.shouldShake = true;
+            const sound = new Audio(sendMessageSound);
+            sound.play();
+            setMessages([...messages, data])
+
         } catch (error) {
             toast.error(error.message)
         } finally {
@@ -28,7 +33,7 @@ const useSendMessage = () => {
         }
 
     }
-    return {sendMessage, loading}
+    return { sendMessage, loading }
 }
 
 export default useSendMessage
