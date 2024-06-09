@@ -11,7 +11,7 @@ const Login = () => {
         await login({username,password})
     }
     return (
-        <div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
+        <div className='flex flex-col items-center justify-center min-w-96 mx-auto bg-slate-400 rounded-md'>
             <div className="h-full p-6 w-full bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 ">
                 <h1 className='text-3xl font-semibold text-gray-300 text-center '>
                     Login

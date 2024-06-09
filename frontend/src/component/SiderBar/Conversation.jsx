@@ -11,6 +11,7 @@ const isOnline = onlineUsers.includes(conversation._id)
   const isSelected = selectedConversation?._id === conversation._id
   return (
     <>
+    <div className='divider my-0 px-0 h-1'/>
     <div 
     className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer ${isSelected ? 'bg-sky-400' :''}`}
     onClick={()=>setSelectedConversation(conversation)}
@@ -31,7 +32,7 @@ const isOnline = onlineUsers.includes(conversation._id)
         </div>
       </div>
     </div>
-    {!lastIndex&&<div className='divider my-0 px-0 h-1'/>}
+    {/* {!lastIndex&&<div className='divider my-0 px-0 h-1'/>} */}
     </>
   )
 }
