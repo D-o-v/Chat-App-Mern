@@ -57,9 +57,9 @@ const SearchInput = () => {
   };
 
   return (
-    <div className='relative flex items-center gap-2 w-full'>
+    <div className='relative flex items-center justify-between w-full '>
       <img src="/logo.svg" width="60px" height='60px' alt="logo" />
-      <div className='relative flex items-center gap-2 w-full'>
+      <div className='relative flex items-center gap-2 '>
         <label className="input input-bordered flex items-center gap-2 w-full">
           <input
             type="text"
